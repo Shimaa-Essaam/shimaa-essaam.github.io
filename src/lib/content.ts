@@ -16,6 +16,7 @@ export const categories = {
  design: pair('Social media designs', 'تصميمات السوشيال ميديا'), strategy: pair('Content planning', 'تخطيط المحتوى'),
 };
 export const videoTitles: Record<string, Bilingual> = {
+ 'video-13': pair('A familiar phrase, a Spanish twist', 'جملة مألوفة بلمسة إسباني'),
  'video-12': pair('German articles, made simple', 'أدوات التعريف في الألماني ببساطة'),
  'video-01': pair('A question worth answering', 'سؤال يستحق الإجابة'),
  'video-02': pair('A space to get things done', 'مساحة تساعدك تنجز'),
@@ -29,7 +30,7 @@ export const videoTitles: Record<string, Bilingual> = {
  'video-10': pair('The relatable side of learning', 'الجانب الخفيف من التعلّم'),
  'video-11': pair('Learning, with a sense of humor', 'التعلّم بروح الفكاهة'),
 };
-export const durations: Record<string, string> = { 'video-12':'0:42', 'video-01':'0:33','video-02':'0:24','video-03':'0:16','video-04':'0:40','video-05':'0:29','video-06':'0:27','video-07':'0:38','video-08':'0:17','video-09':'0:18','video-10':'0:15','video-11':'0:33' };
+export const durations: Record<string, string> = { 'video-13':'0:12', 'video-12':'0:42', 'video-01':'0:33','video-02':'0:24','video-03':'0:16','video-04':'0:40','video-05':'0:29','video-06':'0:27','video-07':'0:38','video-08':'0:17','video-09':'0:18','video-10':'0:15','video-11':'0:33' };
 export const projects: Project[] = [
  { slug:'creativo-reels', brand:'Creativo Languages Institute', category:'video', color:'peach',
   title:pair('Making languages feel closer.', 'اللغات أقرب مما تتخيّل.'),
@@ -58,7 +59,7 @@ export const projects: Project[] = [
   summary:pair('Short edits that connect language learning with recognizable moments from popular culture. The captions add a new context and keep the message grounded in the audience’s everyday experience.', 'فيديوهات قصيرة تربط تعلّم اللغات بمواقف مألوفة من الثقافة الشعبية، مع نصوص تمنح اللقطات سياقًا جديدًا وقريبًا من تجربة الجمهور اليومية.'),
   audience:pair('Social media audiences who connect with humor and everyday learning situations.', 'جمهور السوشيال ميديا المتفاعل مع الفكاهة ومواقف التعلّم اليومية.'),
   approach:pair('Choose a relatable moment, write the framing message, and shape the timing through captions and editing.', 'اختيار موقف قريب من الجمهور، وكتابة الرسالة المناسبة، وضبط توقيتها بالنصوص والمونتاج.'),
-  role:pair('Content adaptation · Scriptwriting · Video editing', 'توظيف المحتوى · كتابة السكريبت · المونتاج'),cover:'/images/video-05.jpg',videos:['video-05','video-06','video-08','video-10','video-11'] },
+  role:pair('Content adaptation · Scriptwriting · Video editing', 'توظيف المحتوى · كتابة السكريبت · المونتاج'),cover:'/images/video-05.jpg',videos:['video-13','video-05','video-06','video-08','video-10','video-11'] },
  { slug:'english-course-content',brand:'Creativo Languages Institute',category:'design',color:'peach',
   title:pair('English for everyday life.', 'إنجليزي للحياة اليومية.'),
   subtitle:pair('English course promotional content', 'محتوى تعريفي لكورسات الإنجليزي'),
