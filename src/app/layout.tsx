@@ -1,3 +1,4 @@
+import {applyAppearance,readAppearance,palettes} from '@/lib/appearance';
 import type { Metadata } from 'next';
 import './globals.css';
 const description = 'Content, scripts, social media design, and video editing by Shimaa Essam. Explore selected work and get in touch for freelance projects and career opportunities.';
@@ -15,5 +16,5 @@ export const metadata: Metadata = {
   images: ['/images/social-preview.png'],
  },
 };
-const initTheme = `(function(){try{var t=localStorage.getItem('shimaa-theme');document.documentElement.dataset.theme=t==='dark'||t==='light'?t:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}catch(e){document.documentElement.dataset.theme='light';}})();`;
+const initTheme = `(${applyAppearance.toString()})((${readAppearance.toString()})(),${JSON.stringify(palettes)});`;
 export default function RootLayout({children}:Readonly<{children:React.ReactNode}>){return <html lang="en" suppressHydrationWarning><head><script dangerouslySetInnerHTML={{__html:initTheme}} /></head><body>{children}</body></html>}

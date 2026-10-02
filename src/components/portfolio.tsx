@@ -1,6 +1,8 @@
 'use client';
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
+import { AppearancePanel } from './appearance-panel';
+import {applyAppearance,readAppearance,palettes} from '@/lib/appearance';
 import { ContactPage } from './contact-page';
 import { PublishedWork } from './published-work';
 import { brandPages, sourceFor } from '@/lib/sources';
@@ -29,14 +31,14 @@ export function Portfolio({lang,page,slug}:Props){
  useEffect(()=>{document.documentElement.lang=lang;document.documentElement.dir=lang==='ar'?'rtl':'ltr';try{localStorage.setItem('shimaa-language',lang)}catch{}},[lang]);
  useEffect(()=>{if(!media)return;previousFocus.current=document.activeElement as HTMLElement;const d=dialog.current;if(d&&!d.open)d.showModal();const original=document.body.style.overflow;document.body.style.overflow='hidden';return()=>{document.body.style.overflow=original;if(d?.open)d.close();previousFocus.current?.focus();}},[media]);
  useEffect(()=>{if(!menu)return;const close=(event:KeyboardEvent)=>{if(event.key==='Escape')setMenu(false)};window.addEventListener('keydown',close);return()=>window.removeEventListener('keydown',close)},[menu]);
- function toggleTheme(){document.documentElement.classList.add('theme-changing');window.setTimeout(()=>document.documentElement.classList.remove('theme-changing'),450);const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('shimaa-theme',next)}catch{}}
+ function toggleTheme(){const current=readAppearance();const next={...current,mode:current.mode==='dark'?'light' as const:'dark' as const,background:undefined};applyAppearance(next,palettes);try{localStorage.setItem('shimaa-theme',next.mode);localStorage.setItem('shimaa-appearance',JSON.stringify(next))}catch{}}
  function play(id:string){setMedia({kind:'video',id})}
 
  return <div className="site" dir={lang==='ar'?'rtl':'ltr'} lang={lang}>
  <a className="skip-link" href="#main">{t('Skip to content','انتقل للمحتوى')}</a>
  <header className="header"><div className="container header-inner"><Link href={route(lang)} className="wordmark" aria-label={t('Shimaa Essam home','شيماء عصام — الرئيسية')}><span className="monogram">s.</span><span>{t('Shimaa Essam','شيماء عصام')}<small>{t('CONTENT CREATOR','صانعة محتوى')}</small></span></Link>
  <nav className="desktop-nav" aria-label={t('Main navigation','القائمة الرئيسية')}>{(['home','work','about','contact'] as const).map((p,i)=><Link key={p} href={route(lang,p==='home'?'':p)} aria-current={page===p?'page':undefined}>{[t('Home','الرئيسية'),t('Work','الأعمال'),t('About','عنّي'),t('Contact','تواصل معي')][i]}{page===p&&<span/>}</Link>)}</nav>
- <div className="header-controls"><Link className="language-switch" href={route(lang==='en'?'ar':'en',currentPath)} hrefLang={lang==='en'?'ar':'en'} aria-label={t('Switch to Arabic','Switch to English')}>{t('عربي','EN')}</Link><span className="control-divider"/><button className="icon-button theme-toggle" onClick={toggleTheme} aria-label={t('Toggle light and dark appearance','تبديل الوضع الفاتح والداكن')}><Moon className="moon-icon" size={19}/><Sun className="sun-icon" size={19}/></button><button className="icon-button menu-button" onClick={()=>setMenu(!menu)} aria-expanded={menu} aria-controls="mobile-menu" aria-label={t('Navigation menu','قائمة التنقل')}>{menu?<X/>:<Menu/>}</button></div></div>
+ <div className="header-controls"><Link className="language-switch" href={route(lang==='en'?'ar':'en',currentPath)} hrefLang={lang==='en'?'ar':'en'} aria-label={t('Switch to Arabic','Switch to English')}>{t('عربي','EN')}</Link><span className="control-divider"/><button className="icon-button theme-toggle" onClick={toggleTheme} aria-label={t('Toggle light and dark appearance','تبديل الوضع الفاتح والداكن')}><Moon className="moon-icon" size={19}/><Sun className="sun-icon" size={19}/></button><AppearancePanel lang={lang}/><button className="icon-button menu-button" onClick={()=>setMenu(!menu)} aria-expanded={menu} aria-controls="mobile-menu" aria-label={t('Navigation menu','قائمة التنقل')}>{menu?<X/>:<Menu/>}</button></div></div>
  {menu&&<nav id="mobile-menu" className="mobile-nav" aria-label={t('Mobile navigation','قائمة الهاتف')}>{(['home','work','about','contact'] as const).map((p,i)=><Link onClick={()=>setMenu(false)} key={p} href={route(lang,p==='home'?'':p)}>{[t('Home','الرئيسية'),t('Work','الأعمال'),t('About','عنّي'),t('Contact','تواصل معي')][i]}<ArrowUpRight size={19}/></Link>)}</nav>}</header>
  <main id="main" className="page-enter" key={`${lang}-${page}-${slug || ''}`}>
  {page==='home'&&<>
