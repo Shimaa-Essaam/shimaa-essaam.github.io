@@ -17,6 +17,7 @@ export const publishedSources=[
 ];
 // Matched against the original Facebook screenshot supplied by the user.
 const matchedSources:Record<string,string>={
+ 'image-12':'https://www.facebook.com/photo?fbid=1593915736097275',
  'video-13':'https://www.facebook.com/share/r/14nEPCCFBfq/',
  'video-09':'https://www.facebook.com/reel/1001260666228831',
  'video-07':'https://www.facebook.com/reel/27388805627428000',

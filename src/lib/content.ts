@@ -84,6 +84,13 @@ export const projects: Project[] = [
    {file:'english-buyer-personas.pdf',label:pair('English course personas','جمهور كورسات الإنجليزي'),preview:'english-personas.png'},
    {file:'german-buyer-personas.pdf',label:pair('German course personas','جمهور كورسات الألماني'),preview:'german-personas.png'},
    {file:'spanish-buyer-personas.pdf',label:pair('Spanish course personas','جمهور كورسات الإسباني'),preview:'spanish-personas.png'}] },
+ { slug:'spanish-course-keep-going',brand:'Creativo Languages Institute',category:'design',color:'cream',
+  title:pair('Keep your Spanish moving.', 'معانا مش هتوقف.'),
+  subtitle:pair('Spanish course promotional design', 'تصميم ترويجي لكورس اللغة الإسبانية'),
+  summary:pair('A promotional social media design for Creativo’s Spanish course. The Arabic headline speaks to learners who start and lose momentum, supported by a clear course message and a booking call to action.', 'تصميم ترويجي لكورس الإسباني في كرياتيفو. العنوان العربي بيخاطب اللي بيبدأوا التعلّم وبيفقدوا الحماس، مع رسالة واضحة عن الكورس ودعوة للحجز.'),
+  audience:pair('Arabic-speaking learners interested in a Spanish language course.', 'الناطقون بالعربية المهتمون بكورس لتعلّم اللغة الإسبانية.'),
+  approach:pair('Pair a bold Arabic headline with Spanish phrases, a learner portrait, and Spanish landmarks. Orange highlights organize the course features and booking message within Creativo’s visual identity.', 'دمج عنوان عربي بارز مع عبارات إسبانية وصورة متعلّمة ومعالم إسبانية. اللمسات البرتقالية بتبرز مميزات الكورس ودعوة الحجز ضمن هوية كرياتيفو.'),
+  role:pair('Social media design', 'تصميم سوشيال ميديا'),cover:'/images/image-12.webp',images:['image-12'] },
 ];
 export const services = [
  {number:'01',title:pair('Words with a purpose.', 'كلمات لها هدف.'),name:pair('Content & scriptwriting','كتابة المحتوى والسكريبتات'),text:pair('Social copy, short-form scripts, and ideas shaped around your audience and your message.','نصوص للسوشيال ميديا وسكريبتات قصيرة وأفكار مبنية على جمهورك ورسالتك.')},
