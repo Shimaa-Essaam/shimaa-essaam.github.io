@@ -1,16 +1,25 @@
 export type Language = 'en' | 'ar';
 export type Bilingual = { en: string; ar: string };
 export const pair = (en: string, ar: string): Bilingual => ({ en, ar });
-export const base = process.env.NEXT_PUBLIC_BASE_PATH || '';
-export const asset = (path: string) => `${base}${path}`;
-export const route = (lang: Language, path = '') => `${lang === 'ar' ? '/ar' : ''}${path ? '/' + path : ''}/`;
 export const contact = {
  email: 'shimaaesaam72@gmail.com', phone: '+20 114 737 2924',
  linkedin: 'https://www.linkedin.com/in/shimaaesaam196014253/',
  whatsapp: (lang: Language) => `https://wa.me/201147372924?text=${encodeURIComponent(lang === 'en' ? 'Hi Shimaa! I would like to discuss a content project or work opportunity with you.' : 'أهلًا شيماء! حابب أتكلم معاكي عن مشروع محتوى أو فرصة عمل.')}`,
 };
 export type Category = 'video' | 'design' | 'strategy';
-export type Project = { slug: string; brand: string; category: Category; title: Bilingual; subtitle: Bilingual; summary: Bilingual; audience: Bilingual; approach: Bilingual; role: Bilingual; cover: string; images?: string[]; videos?: string[]; documents?: { file: string; label: Bilingual; preview: string }[]; color: string };
+export type Testimonial = { quote: Bilingual; name: string; role: Bilingual };
+export type Project = {
+ slug: string; brand: string; category: Category; title: Bilingual; subtitle: Bilingual; summary: Bilingual; audience: Bilingual; approach: Bilingual; role: Bilingual; cover: string;
+ images?: string[]; videos?: string[]; documents?: { file: string; label: Bilingual; preview: string }[]; color: string;
+ /**
+  * PLACEHOLDER — case-study outcome. Leave undefined until there is a real, attributable
+  * result (e.g. reach, engagement, enrolments, client feedback). The "Outcome" section
+  * only renders when this is set, so nothing invented ever appears on the site.
+  */
+ outcome?: Bilingual;
+ /** PLACEHOLDER — a real client quote with the person's name and role. Renders only when set. */
+ testimonial?: Testimonial;
+};
 export const categories = {
  all: pair('All work', 'كل الأعمال'), video: pair('Videos & scripts', 'الفيديوهات والسكريبتات'),
  design: pair('Social media designs', 'تصميمات السوشيال ميديا'), strategy: pair('Content planning', 'تخطيط المحتوى'),
@@ -105,3 +114,9 @@ export const services = [
  {number:'03',title:pair('A visual point of view.', 'فكرة تتحوّل لصورة.'),name:pair('Social media design','تصميم السوشيال ميديا'),text:pair('Visual content that gives your message a recognizable look across social platforms.','محتوى بصري يمنح رسالتك شكلًا مميزًا عبر منصات التواصل.')},
  {number:'04',title:pair('Ideas with direction.', 'أفكار لها اتجاه.'),name:pair('Content planning','تخطيط المحتوى'),text:pair('Audience profiles, content angles, and calendars that give each piece a place in the bigger picture.','دراسة للجمهور وزوايا للمحتوى وخطط تجعل كل قطعة جزءًا من صورة متكاملة.')},
 ];
+/** Honest volume counts, derived from the projects above. */
+export const workTotals = {
+ reels: projects.reduce((sum, project) => sum + (project.videos?.length ?? 0), 0),
+ designs: projects.reduce((sum, project) => sum + (project.images?.length ?? 0), 0),
+ documents: projects.reduce((sum, project) => sum + (project.documents?.length ?? 0), 0),
+};
