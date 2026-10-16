@@ -16,6 +16,7 @@ export const categories = {
  design: pair('Social media designs', 'تصميمات السوشيال ميديا'), strategy: pair('Content planning', 'تخطيط المحتوى'),
 };
 export const videoTitles: Record<string, Bilingual> = {
+ 'video-14': pair('Starting a language from scratch', 'تعلّم لغة من الصفر'),
  'video-13': pair('A familiar phrase, a Spanish twist', 'جملة مألوفة بلمسة إسباني'),
  'video-12': pair('German articles, made simple', 'أدوات التعريف في الألماني ببساطة'),
  'video-01': pair('A question worth answering', 'سؤال يستحق الإجابة'),
@@ -30,7 +31,13 @@ export const videoTitles: Record<string, Bilingual> = {
  'video-10': pair('The relatable side of learning', 'الجانب الخفيف من التعلّم'),
  'video-11': pair('Everyday Spanish expressions', 'تعبيرات إسبانية للحياة اليومية'),
 };
-export const durations: Record<string, string> = { 'video-13':'0:12', 'video-12':'0:42', 'video-01':'0:33','video-02':'0:24','video-03':'0:16','video-04':'0:40','video-05':'0:29','video-06':'0:27','video-07':'0:38','video-08':'0:17','video-09':'0:18','video-10':'0:15','video-11':'0:33' };
+export const videoDetails: Record<string, {label:Bilingual;description:Bilingual}> = {
+ 'video-14': {
+  label:pair('LANGUAGE LEARNING','تعلّم اللغات'),
+  description:pair('A Creativo presenter discusses language learning and starting from scratch, with Arabic captions and supporting footage.', 'فيديو من كرياتيفو يناقش تعلّم اللغات والبدء من الصفر، مع نصوص عربية ولقطات توضيحية.'),
+ },
+};
+export const durations: Record<string, string> = { 'video-14':'0:57', 'video-13':'0:12', 'video-12':'0:42', 'video-01':'0:33','video-02':'0:24','video-03':'0:16','video-04':'0:40','video-05':'0:29','video-06':'0:27','video-07':'0:38','video-08':'0:17','video-09':'0:18','video-10':'0:15','video-11':'0:33' };
 export const projects: Project[] = [
  { slug:'creativo-reels', brand:'Creativo Languages Institute', category:'video', color:'peach',
   title:pair('Making languages feel closer.', 'اللغات أقرب مما تتخيّل.'),
@@ -38,7 +45,7 @@ export const projects: Project[] = [
   summary:pair('Short-form content that puts the people and language-learning experience at Creativo in focus. Clear subtitles and carefully timed edits keep the message easy to follow.', 'محتوى قصير يسلّط الضوء على الأشخاص وتجربة تعلّم اللغات في كرياتيفو، مع نصوص واضحة على الشاشة ومونتاج يساعد على متابعة الرسالة.'),
   audience:pair('People exploring language courses and practical ways to improve their skills.', 'الأشخاص المهتمون بكورسات اللغات وتطوير مهاراتهم بشكل عملي.'),
   approach:pair('Build each reel around one message. Shape the script, edit the footage, and use on-screen text to support the spoken content.', 'تركيز كل فيديو على رسالة واحدة، مع كتابة السكريبت ومونتاج اللقطات وإضافة النصوص الداعمة للكلام.'),
-  role:pair('Scriptwriting · Video editing', 'كتابة السكريبت · مونتاج الفيديو'), cover:'/images/video-04.jpg', videos:['video-12','video-04','video-01','video-03','video-07','video-09','video-05','video-11'] },
+  role:pair('Scriptwriting · Video editing', 'كتابة السكريبت · مونتاج الفيديو'), cover:'/images/video-04.jpg', videos:['video-14','video-12','video-04','video-01','video-03','video-07','video-09','video-05','video-11'] },
  { slug:'spanish-social-content', brand:'Creativo Languages Institute', category:'design',color:'cream',
   title:pair('A new language. A familiar voice.', 'لغة جديدة بصوت قريب.'),
   subtitle:pair('Spanish course social content', 'محتوى السوشيال لكورسات الإسباني'),
