@@ -183,7 +183,7 @@ button { border: 0; background: none; padding: 0; cursor: pointer; -webkit-tap-h
 }
 .header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .wordmark { display: flex; align-items: center; gap: 12px; font-size: 1.0625rem; font-weight: 600; line-height: 1.3; white-space: nowrap; }
-.wordmark small { display: block; margin-top: 4px; color: var(--muted); font-size: 0.6875rem; font-weight: 500; letter-spacing: 0.18em; }
+.wordmark small { display: block; margin-top: 4px; color: var(--muted); font-size: var(--fs-label); font-weight: 500; letter-spacing: 0.18em; }
 .monogram { margin-top: -6px; color: var(--accent); font-family: var(--font-display); font-size: 44px; font-style: italic; line-height: 1; }
 .desktop-nav { display: flex; align-items: center; gap: 8px; height: 100%; }
 .desktop-nav > a { position: relative; padding: 12px 14px; color: var(--muted); font-size: var(--fs-small); }
@@ -414,7 +414,7 @@ button { border: 0; background: none; padding: 0; cursor: pointer; -webkit-tap-h
 .project-meta > div { min-width: 0; overflow-wrap: anywhere; }
 .project-meta dt { color: var(--muted); font-size: var(--fs-label); font-weight: 600; letter-spacing: 0.12em; }
 .project-meta dd { margin-top: 6px; font-size: var(--fs-body); }
-.brand-page-link { display: flex; align-items: center; gap: 6px; margin-top: 6px; color: var(--accent); font-size: var(--fs-small); font-weight: 600; }
+.brand-page-link { display: flex; align-items: center; gap: 6px; min-height: 32px; margin-top: 2px; color: var(--accent); font-size: var(--fs-small); font-weight: 600; }
 
 .case-story, .case-outcome { display: grid; grid-template-columns: 0.8fr 1.5fr; gap: 72px; padding-block: 64px; }
 .case-story h2, .case-outcome h2 { font-size: clamp(1.9rem, 3vw, 2.25rem); }
@@ -603,14 +603,15 @@ html[lang='ar'] {
 }
 html[lang='ar'] body { font-size: 1.0625rem; line-height: 1.85; }
 html[lang='ar'] :is(h1, h2, h3, .eyebrow, .availability, .hero-intro, .hero-footnote, .project-category, .wordmark small, .capability-strip li, .proof-brands > span, .orbit-label, .portrait-caption, .photo-label, .reel-caption small, .project-meta dt, .contact-detail small, .tools-row > span, .service-name, .experience-dates, .next-project small, .appearance-content legend) { letter-spacing: 0; }
-html[lang='ar'] :is(h1, h2) { font-weight: 700; line-height: 1.32; }
+html[lang='ar'] :is(h1, h2):not(.eyebrow, .form-step) { font-weight: 700; line-height: 1.32; }
 html[lang='ar'] h1 em, html[lang='ar'] h2 em { font-weight: 500; }
 html[lang='ar'] :is(em, .handwritten, .teaser-quote figcaption, .services-section .section-description) { font-style: normal; }
 html[lang='ar'] h3 { font-weight: 600; }
 html[lang='ar'] .hero h1 { font-size: clamp(2.75rem, 4.8vw, 4.6rem); }
 html[lang='ar'] .project-heading h1, html[lang='ar'] .about-hero h1 { font-size: clamp(2.5rem, 5vw, 4.25rem); }
 html[lang='ar'] .contact-intro h1 { font-size: clamp(2.6rem, 4vw, 4rem); }
-html[lang='ar'] h2 { font-size: clamp(1.9rem, 3.4vw, 3rem); }
+/* :where() keeps this at element specificity so component sizes (.case-story h2, .eyebrow) still win. */
+:where(html[lang='ar']) h2 { font-size: clamp(1.9rem, 3.4vw, 3rem); }
 html[lang='ar'] .contact-band h2 { font-size: clamp(2rem, 3.4vw, 3.2rem); }
 html[lang='ar'] .project-info :is(h2, h3) { font-size: clamp(1.3rem, 2vw, 1.55rem); font-weight: 600; letter-spacing: 0; }
 html[lang='ar'] :is(.teaser-quote blockquote, .services-section .section-description) { font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 600; letter-spacing: 0; line-height: 1.45; }
@@ -662,6 +663,7 @@ html[lang='ar'] .media-source-link, html[lang='ar'] .footer-cv { text-underline-
 @media (max-width: 600px) {
   .header-controls { gap: 0; }
   .wordmark { gap: 8px; font-size: 1rem; }
+  .wordmark small { letter-spacing: 0.08em; }
   .monogram { font-size: 38px; }
   .control-divider { margin-inline: 2px; }
   .header-controls .icon-button { width: 40px; }
@@ -710,11 +712,14 @@ html[lang='ar'] .media-source-link, html[lang='ar'] .footer-cv { text-underline-
 @media (max-width: 360px) {
   .wordmark small { display: none; }
   .header-controls .icon-button { width: 36px; }
+  /* Light/dark stays available inside the appearance panel. */
+  .theme-toggle, .control-divider { display: none; }
 }
 
 /* 13. Motion: one orchestrated hero entrance, plus feedback on interaction. */
 @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-@keyframes portrait-rise { from { opacity: 0; transform: translateY(18px) scale(0.975); } to { opacity: 1; transform: none; } }
+/* Transform only: the portrait is the LCP element, and an opacity-0 start would delay it. */
+@keyframes portrait-rise { from { transform: translateY(18px) scale(0.975); } to { transform: none; } }
 @keyframes modal-in { from { opacity: 0; transform: translateY(14px) scale(0.96); } to { opacity: 1; transform: none; } }
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 .hero-copy > * { animation: rise 0.8s var(--ease) both; }

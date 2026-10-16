@@ -24,7 +24,9 @@ export function RootDocument({ lang, fonts, children }: { lang: Language; fonts:
           <SiteHeader lang={lang} />
           <main id="main">{children}</main>
           <SiteFooter lang={lang} />
-          <WhatsAppButton lang={lang} />
+          <aside aria-label={pick(lang, 'Quick contact', 'تواصل سريع')}>
+            <WhatsAppButton lang={lang} />
+          </aside>
         </MediaProvider>
       </body>
     </html>

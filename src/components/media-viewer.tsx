@@ -75,11 +75,13 @@ export function ReelTile({ id, lang, eager = false }: { id: string; lang: Langua
   const title = videoTitles[id][lang];
   return (
     <div className="reel-item">
-      <button type="button" className="reel" onClick={() => open({ kind: 'video', id })} aria-label={`${pick(lang, 'Play', 'تشغيل')}: ${title} (${durations[id]})`}>
+      {/* The accessible name is the visible caption, prefixed with "Play" for screen readers. */}
+      <button type="button" className="reel" onClick={() => open({ kind: 'video', id })}>
         <img src={asset(`/images/thumbs/${id}.webp`)} alt="" loading={eager ? 'eager' : 'lazy'} decoding="async" width="540" height="960" />
-        <span className="reel-duration" aria-hidden="true">{durations[id]}</span>
+        <span className="reel-duration">{durations[id]}</span>
         <span className="reel-play" aria-hidden="true"><Play size={24} fill="currentColor" /></span>
-        <span className="reel-caption" aria-hidden="true">
+        <span className="reel-caption">
+          <span className="sr-only">{pick(lang, 'Play', 'تشغيل')}: </span>
           <small>{videoDetails[id]?.label[lang] ?? pick(lang, 'SCRIPT & EDIT', 'سكريبت ومونتاج')}</small>
           <strong>{title}</strong>
         </span>
