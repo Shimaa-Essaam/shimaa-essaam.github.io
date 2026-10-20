@@ -4,10 +4,13 @@ A browser is used (not PIL) so Arabic text is shaped correctly. Requires:
     pip install playwright && python -m playwright install chromium
 Run from the repository root after changing a project title, subtitle or cover:
     python scripts/render-social-images.py
+Pass project slugs to render only those projects' cards:
+    python scripts/render-social-images.py spanish-course-tanta
 """
 import base64
 import html
 import re
+import sys
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
@@ -103,6 +106,7 @@ span{font-family:'DM Serif Display';font-style:italic;font-size:118px;line-heigh
 
 
 def main():
+    only = set(sys.argv[1:])
     OG.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch()
@@ -115,13 +119,15 @@ def main():
             print(target.relative_to(ROOT))
 
         for project in read_projects():
+            if only and project["slug"] not in only:
+                continue
             for lang in ("en", "ar"):
                 suffix = "-ar" if lang == "ar" else ""
                 shoot(project_card(project, lang), OG / f"{project['slug']}{suffix}.png")
-        shoot(ARABIC_SITE_CARD, PUBLIC / "images" / "social-preview-ar.png")
-
-        tab.set_viewport_size({"width": 180, "height": 180})
-        shoot(APPLE_ICON, ROOT / "src" / "app" / "apple-icon.png")
+        if not only:
+            shoot(ARABIC_SITE_CARD, PUBLIC / "images" / "social-preview-ar.png")
+            tab.set_viewport_size({"width": 180, "height": 180})
+            shoot(APPLE_ICON, ROOT / "src" / "app" / "apple-icon.png")
         browser.close()
 
 

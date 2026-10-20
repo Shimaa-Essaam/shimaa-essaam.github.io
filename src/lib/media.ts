@@ -11,7 +11,9 @@ export const designSizes: Record<string, [number, number]> = {
   'image-09': [1254, 1254],
   'image-10': [1254, 1254],
   'image-11': [1254, 1254],
-  'image-12': [526, 526],
+  'image-12': [1254, 1254],
+  'image-13': [1254, 1254],
+  'image-14': [1254, 1254],
 };
 
 /** Card thumbnails in public/images/thumbs are at most 720 px wide (see scripts/optimize-images.py). */
