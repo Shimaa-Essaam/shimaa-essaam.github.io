@@ -1,17 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight, ArrowUpRight, FileText } from 'lucide-react';
-import { categories, projects, type Language, type Project } from '@/lib/content';
+import { categories, designCount, projects, type Language, type Project } from '@/lib/content';
 import { brandPages } from '@/lib/sources';
 import { asset, pick, route } from '@/lib/site';
-import { DesignTile, ReelTile } from '../media-viewer';
+import { DesignGallery, ReelTile } from '../media-viewer';
 import { ProjectCard } from '../project-card';
 import { ContactBand, SectionIntro } from '../sections';
 
 function deliverableSummary(project: Project, lang: Language) {
   const t = (en: string, ar: string) => pick(lang, en, ar);
   if (project.videos) return t(`${project.videos.length} short-form ${project.videos.length === 1 ? 'video' : 'videos'}`, `${project.videos.length} فيديو قصير`);
-  if (project.images) return t(`${project.images.length} social media ${project.images.length === 1 ? 'design' : 'designs'}`, `${project.images.length} تصميم سوشيال ميديا`);
+  const designs = designCount(project);
+  if (designs) return t(`${designs} social media ${designs === 1 ? 'design' : 'designs'}`, `${designs} تصميم سوشيال ميديا`);
   if (project.documents) return t(`${project.documents.length} planning documents (PDF)`, `${project.documents.length} ملفات تخطيط (PDF)`);
   return '';
 }
@@ -64,11 +65,7 @@ export function ProjectPage({ project, lang }: { project: Project; lang: Languag
         <section className="container project-deliverables" aria-labelledby="work-title">
           <h2 id="work-title" className="eyebrow">{t('THE WORK', 'التنفيذ')}</h2>
           {project.videos && <div className="detail-reel-grid">{project.videos.map((id, i) => <ReelTile key={id} id={id} lang={lang} eager={i < 3} />)}</div>}
-          {project.images && (
-            <div className="design-gallery">
-              {project.images.map((id, i) => <DesignTile key={id} id={id} index={i} lang={lang} alt={`${project.subtitle[lang]} — ${i + 1}`} />)}
-            </div>
-          )}
+          {project.designs && <DesignGallery designs={project.designs} lang={lang} />}
           {project.documents && (
             <div className="document-grid">
               {project.documents.map((doc) => (

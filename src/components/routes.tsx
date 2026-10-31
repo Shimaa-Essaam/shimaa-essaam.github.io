@@ -1,7 +1,10 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { projects, type Language } from '@/lib/content';
+import { legacyProjects, projects, type Language } from '@/lib/content';
 import { pageMetadata, projectImage, structuredData } from '@/lib/seo';
-import { pick } from '@/lib/site';
+import { asset, pick, route } from '@/lib/site';
+import { validateContent } from '@/lib/validate-content';
 import { ContactPage } from './contact-page';
 import { JsonLd } from './json-ld';
 import { AboutPage } from './pages/about-page';
@@ -54,16 +57,38 @@ export function ContactRoute({ lang }: { lang: Language }) {
 }
 
 export type ProjectParams = { params: Promise<{ slug: string }> };
-export const projectParams = () => projects.map((project) => ({ slug: project.slug }));
+export function projectParams() {
+  validateContent();
+  return [...projects.map((project) => project.slug), ...Object.keys(legacyProjects)].map((slug) => ({ slug }));
+}
+/** Where an old single-post project URL now lives: the design inside its series. */
+const legacyTarget = (lang: Language, slug: string) => {
+  const target = legacyProjects[slug];
+  return target && `${route(lang, `work/${target.slug}`)}#${target.design}`;
+};
 const findProject = (slug: string) => projects.find((project) => project.slug === slug);
 
-export async function projectMetadata(lang: Language, { params }: ProjectParams) {
-  const project = findProject((await params).slug);
+export async function projectMetadata(lang: Language, { params }: ProjectParams): Promise<Metadata> {
+  const { slug } = await params;
+  const moved = legacyTarget(lang, slug);
+  if (moved) return { title: pick(lang, 'This project has moved', 'المشروع اتنقل'), robots: { index: false } };
+  const project = findProject(slug);
   if (!project) return {};
   return pageMetadata({ lang, path: `work/${project.slug}`, title: project.title[lang], description: project.summary[lang], image: projectImage(project, lang) });
 }
 export async function ProjectRoute({ lang, params }: { lang: Language } & ProjectParams) {
-  const project = findProject((await params).slug);
+  const { slug } = await params;
+  const moved = legacyTarget(lang, slug);
+  if (moved) {
+    return (
+      <section className="container page-heading">
+        <meta httpEquiv="refresh" content={`0;url=${asset(moved)}`} />
+        <h1>{pick(lang, 'This project has moved.', 'المشروع ده اتنقل.')}</h1>
+        <p><Link href={moved}>{findProject(legacyProjects[slug].slug)?.title[lang]}</Link></p>
+      </section>
+    );
+  }
+  const project = findProject(slug);
   if (!project) notFound();
   return <><JsonLd data={structuredData(lang, `work/${project.slug}`, project)} /><ProjectPage project={project} lang={lang} /></>;
 }

@@ -5,7 +5,7 @@ A browser is used (not PIL) so Arabic text is shaped correctly. Requires:
 Run from the repository root after changing a project title, subtitle or cover:
     python scripts/render-social-images.py
 Pass project slugs to render only those projects' cards:
-    python scripts/render-social-images.py spanish-course-tanta
+    python scripts/render-social-images.py spanish-social-content
 """
 import base64
 import html

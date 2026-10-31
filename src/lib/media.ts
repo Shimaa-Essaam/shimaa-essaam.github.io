@@ -14,7 +14,16 @@ export const designSizes: Record<string, [number, number]> = {
   'image-12': [1254, 1254],
   'image-13': [1254, 1254],
   'image-14': [1254, 1254],
+  'image-15': [2508, 2508],
+  'image-16': [2508, 2508],
+  'image-17': [2048, 2048],
+  'image-18': [2508, 2508],
+  'image-19': [2508, 2508],
+  'image-20': [1199, 1312],
 };
+
+/** Designs wider than 1600 px (the 2x AI-upscaled ones) also ship this 1254 px copy in public/images/large for phones. */
+const largeWidth = 1254;
 
 /** Card thumbnails in public/images/thumbs are at most 720 px wide (see scripts/optimize-images.py). */
 export function designImage(id: string) {
@@ -22,6 +31,7 @@ export function designImage(id: string) {
   const thumbWidth = Math.min(width, 720);
   return {
     thumb: `/images/thumbs/${id}.webp`,
+    large: width > 1600 ? { src: `/images/large/${id}.webp`, width: largeWidth } : undefined,
     full: `/images/${id}.webp`,
     width: thumbWidth,
     height: Math.round((height * thumbWidth) / width),

@@ -8,9 +8,15 @@ export const contact = {
 };
 export type Category = 'video' | 'design' | 'strategy';
 export type Testimonial = { quote: Bilingual; name: string; role: Bilingual };
+/**
+ * One published design. `id` names the files in public/images (full size), images/thumbs and
+ * images/large (see docs/adding-work.md). `source` is the exact post the design was published in;
+ * leave it out when the post is unknown rather than guessing. A carousel lists its other slides in `slides`.
+ */
+export type Design = { id: string; caption: Bilingual; source?: string; slides?: string[] };
 export type Project = {
  slug: string; brand: string; category: Category; title: Bilingual; subtitle: Bilingual; summary: Bilingual; audience: Bilingual; approach: Bilingual; role: Bilingual; cover: string;
- images?: string[]; videos?: string[]; documents?: { file: string; label: Bilingual; preview: string }[]; color: string;
+ designs?: Design[]; videos?: string[]; documents?: { file: string; label: Bilingual; preview: string }[]; color: string;
  /**
   * PLACEHOLDER — case-study outcome. Leave undefined until there is a real, attributable
   * result (e.g. reach, engagement, enrolments, client feedback). The "Outcome" section
@@ -61,7 +67,20 @@ export const projects: Project[] = [
   summary:pair('A collection of Arabic social posts for Spanish learning. Everyday expressions, local references, and playful ideas bring the subject closer to the audience.', 'مجموعة منشورات عربية لتعلّم الإسباني، بتعبيرات يومية وإشارات محلية وأفكار خفيفة تقرّب الموضوع للجمهور.'),
   audience:pair('Arabic-speaking learners exploring Spanish courses, particularly in Tanta.', 'المهتمون بتعلّم الإسباني من الناطقين بالعربية، خصوصًا في طنطا.'),
   approach:pair('Pair a recognizable hook with a clear message. Move between course promotion, useful vocabulary, and posts that invite a response.', 'ربط بداية لافتة برسالة واضحة، والتنويع بين التعريف بالكورس والمفردات المفيدة والمنشورات التي تشجّع التفاعل.'),
-  role:pair('Content ideas · Copywriting · Visual design', 'أفكار المحتوى · الكتابة · التصميم'), cover:'/images/image-09.webp', images:['image-09','image-02','image-01','image-03','image-04','image-05','image-10'] },
+  role:pair('Content ideas · Copywriting · Visual design', 'أفكار المحتوى · الكتابة · التصميم'), cover:'/images/image-09.webp', designs:[
+   { id:'image-09', caption:pair('Tanta, the city of Spanish', 'طنطا بقت بلد الإسباني'), source:'https://www.facebook.com/photo/?fbid=1456985116457005&set=a.557295843092608' },
+   { id:'image-02', caption:pair('Leave the bread to the baker', 'ادي العيش لخبازه') },
+   { id:'image-01', caption:pair('We don’t rely on motivation', 'احنا مبنعتمدش على الحماس'), source:'https://www.facebook.com/photo.php?fbid=1526658582822991' },
+   { id:'image-03', caption:pair('Everyday verbs in Spanish', 'أفعال يومية بالإسبانية'), source:'https://www.facebook.com/photo.php?fbid=1487433366745513' },
+   { id:'image-04', caption:pair('Spanish, from start to finish', 'من طقطق لسلام عليكم بالإسباني') },
+   { id:'image-05', caption:pair('Shorten the distance', 'اختصر المسافة'), source:'https://www.facebook.com/photo.php?fbid=1489223769899806' },
+   { id:'image-10', caption:pair('Match prediction contest', 'مسابقة توقّع الماتش'), source:'https://www.facebook.com/photo.php?fbid=1450535063768677' },
+   { id:'image-12', caption:pair('Start and stall? Not with us', 'بتبدأ وتكسل؟ معانا مش هتقف!'), source:'https://www.facebook.com/photo?fbid=1593915736097275' },
+   { id:'image-14', caption:pair('A real upgrade, in Tanta', 'كورس إسباني يعملك Upgrade في طنطا') },
+   { id:'image-15', slides:['image-16','image-17','image-18'], caption:pair('Common Spanish mistakes', 'أخطاء شائعة في تعلّم الإسباني'), source:'https://www.facebook.com/koraasarcasm/posts/pfbid02xA5bseJM4K9oX2vzsBSFnvQFKBsdfDUHbHS7cySXgNdBAiEzpbnvfi14B93pVWjwl' },
+   { id:'image-19', caption:pair('New course launch', 'كورس جديد هيبدأ'), source:'https://www.facebook.com/photo?fbid=1614406050714910' },
+   { id:'image-20', caption:pair('November group timetable', 'مواعيد مجموعات نوفمبر'), source:'https://www.facebook.com/photo?fbid=1618860143602834' },
+  ] },
  { slug:'espacio-space',brand:'Espacio',category:'video',color:'rose',
   title:pair('More than a place to work.', 'مساحة لأكثر من مجرد شغل.'),
   subtitle:pair('A short-form space introduction', 'فيديو قصير للتعريف بالمكان'),
@@ -82,14 +101,20 @@ export const projects: Project[] = [
   summary:pair('Social visuals that frame English learning around practical situations and a more approachable learning experience.', 'تصميمات اجتماعية تقدّم تعلّم الإنجليزي من خلال المواقف العملية وتجربة تعلّم أقرب للناس.'),
   audience:pair('Arabic-speaking learners looking for practical English courses.', 'المهتمون من الناطقين بالعربية بكورسات إنجليزي عملية.'),
   approach:pair('Use a direct headline, familiar visual references, and a clear course message within Creativo’s orange and cream visual language.', 'استخدام عنوان مباشر وعناصر بصرية مألوفة ورسالة واضحة، ضمن ألوان كرياتيفو البرتقالية والكريمية.'),
-  role:pair('Copywriting · Visual design', 'كتابة المحتوى · التصميم'),cover:'/images/image-06.webp',images:['image-06','image-07'] },
+  role:pair('Copywriting · Visual design', 'كتابة المحتوى · التصميم'),cover:'/images/image-06.webp',designs:[
+   { id:'image-06', caption:pair('English without the filler', 'الـEnglish بعيدًا عن الحشو') },
+   { id:'image-07', caption:pair('English in Tanta, done differently', 'الـEnglish في طنطا بقى حاجة تانية') },
+  ] },
  { slug:'espacio-accounting',brand:'Espacio',category:'design',color:'rose',
   title:pair('Skills beyond the certificate.', 'مهارة تتجاوز الشهادة.'),
   subtitle:pair('Accounting course promotional visuals', 'تصميمات تعريفية لكورس المحاسبة'),
   summary:pair('Two promotional directions for an accounting course, highlighting hands-on learning and the connection between study and practical work.', 'اتجاهان بصريان للتعريف بكورس محاسبة، يبرزان التطبيق العملي والربط بين الدراسة والشغل.'),
   audience:pair('People exploring accounting training and practical career skills.', 'المهتمون بالتدريب في المحاسبة واكتساب مهارات عملية للشغل.'),
   approach:pair('Lead with the value of practical experience, then use strong typographic hierarchy to make the course message easy to scan.', 'البدء بقيمة الخبرة العملية، ثم ترتيب العناوين والعناصر البصرية لتوصيل رسالة الكورس بسرعة.'),
-  role:pair('Copywriting · Visual design', 'كتابة المحتوى · التصميم'),cover:'/images/image-11.webp',images:['image-11','image-08'] },
+  role:pair('Copywriting · Visual design', 'كتابة المحتوى · التصميم'),cover:'/images/image-11.webp',designs:[
+   { id:'image-11', caption:pair('More than a certificate', 'مش مجرد شهادة في إيدك') },
+   { id:'image-08', caption:pair('Accounting, the practical way', 'كورس المحاسبة بأسلوب عملي') },
+  ] },
  { slug:'language-audience-research',brand:'Creativo Languages Institute',category:'strategy',color:'sage',
   title:pair('Good content starts with people.', 'المحتوى الجيد يبدأ من الجمهور.'),
   subtitle:pair('Buyer personas for language courses', 'شخصيات الجمهور لكورسات اللغات'),
@@ -100,27 +125,15 @@ export const projects: Project[] = [
    {file:'english-buyer-personas.pdf',label:pair('English course personas','جمهور كورسات الإنجليزي'),preview:'english-personas.png'},
    {file:'german-buyer-personas.pdf',label:pair('German course personas','جمهور كورسات الألماني'),preview:'german-personas.png'},
    {file:'spanish-buyer-personas.pdf',label:pair('Spanish course personas','جمهور كورسات الإسباني'),preview:'spanish-personas.png'}] },
- { slug:'spanish-course-keep-going',brand:'Creativo Languages Institute',category:'design',color:'cream',
-  title:pair('Keep your Spanish moving.', 'معانا مش هتوقف.'),
-  subtitle:pair('Spanish course promotional design', 'تصميم ترويجي لكورس اللغة الإسبانية'),
-  summary:pair('A promotional social media design for Creativo’s Spanish course. The Arabic headline speaks to learners who start and lose momentum, supported by a clear course message and a booking call to action.', 'تصميم ترويجي لكورس الإسباني في كرياتيفو. العنوان العربي بيخاطب اللي بيبدأوا التعلّم وبيفقدوا الحماس، مع رسالة واضحة عن الكورس ودعوة للحجز.'),
-  audience:pair('Arabic-speaking learners interested in a Spanish language course.', 'الناطقون بالعربية المهتمون بكورس لتعلّم اللغة الإسبانية.'),
-  approach:pair('Pair a bold Arabic headline with Spanish phrases, a learner portrait, and Spanish landmarks. Orange highlights organize the course features and booking message within Creativo’s visual identity.', 'دمج عنوان عربي بارز مع عبارات إسبانية وصورة متعلّمة ومعالم إسبانية. اللمسات البرتقالية بتبرز مميزات الكورس ودعوة الحجز ضمن هوية كرياتيفو.'),
-  role:pair('Social media design', 'تصميم سوشيال ميديا'),cover:'/images/image-12.webp',images:['image-12'] },
  { slug:'german-course-brighter-future',brand:'Creativo Languages Institute',category:'design',color:'peach',
   title:pair('German is not that complicated.', 'الألماني مش معقد.'),
   subtitle:pair('German course promotional design', 'تصميم ترويجي لكورس اللغة الألمانية'),
   summary:pair('A promotional social media design for Creativo’s German course. The Arabic headline contrasts a friend who started German six months ago with a reader who still says “German is complicated”, followed by the course features and a contact number.', 'تصميم ترويجي لكورس الألماني في كرياتيفو. العنوان العربي بيقارن بين صاحب بدأ ألماني من ٦ شهور وبين اللي لسه بيقول «الألماني معقد»، ومعاه مميزات الكورس ورقم للتواصل.'),
   audience:pair('Arabic-speaking learners interested in German who still see it as a difficult language.', 'الناطقون بالعربية المهتمون بالألماني واللي لسه شايفينه لغة صعبة.'),
   approach:pair('Set a familiar study-desk scene with German books, notes, and flag details beside a bold Arabic headline. Orange highlights pick out the key phrase, the course features, and the contact number within Creativo’s visual identity.', 'مشهد مكتب مذاكرة مألوف فيه كتب وملاحظات ألمانية وعلم ألمانيا جنب عنوان عربي بارز. اللمسات البرتقالية بتبرز الجملة الأساسية ومميزات الكورس ورقم التواصل ضمن هوية كرياتيفو.'),
-  role:pair('Social media design', 'تصميم سوشيال ميديا'),cover:'/images/image-13.webp',images:['image-13'] },
- { slug:'spanish-course-tanta',brand:'Creativo Languages Institute',category:'design',color:'cream',
-  title:pair('Spanish as a real upgrade.', 'Upgrade حقيقي مع الإسباني.'),
-  subtitle:pair('Spanish course promotional design for Tanta', 'تصميم ترويجي لكورس الإسباني في طنطا'),
-  summary:pair('A promotional social media design for Creativo’s Spanish course, addressed to learners in Tanta. The Arabic headline asks why stay on the same salary and presents the course as a real upgrade, followed by the course features and a call to action.', 'تصميم ترويجي لكورس الإسباني في كرياتيفو موجّه لجمهور طنطا. العنوان العربي بيسأل ليه تفضل بنفس المرتب، وبيقدّم الكورس كـ Upgrade حقيقي، ومعاه مميزات الكورس ودعوة للتسجيل.'),
-  audience:pair('Arabic-speaking learners in Tanta who want Spanish to move their career forward.', 'الناطقون بالعربية في طنطا اللي عايزين الإسباني يحرّك مستقبلهم المهني لقدّام.'),
-  approach:pair('Pair a direct Arabic question with a relaxed learner scene, Spanish landmarks and phrases, and a “Tanta” note that ties the message to the city. Orange highlights organize the headline, course features, and call to action within Creativo’s visual identity.', 'دمج سؤال عربي مباشر مع مشهد متعلّم مسترخي ومعالم وعبارات إسبانية، وكلمة «Tanta» اللي بتربط الرسالة بالمدينة. اللمسات البرتقالية بتنظّم العنوان ومميزات الكورس ودعوة التسجيل ضمن هوية كرياتيفو.'),
-  role:pair('Social media design', 'تصميم سوشيال ميديا'),cover:'/images/image-14.webp',images:['image-14'] },
+  role:pair('Social media design', 'تصميم سوشيال ميديا'),cover:'/images/image-13.webp',designs:[
+   { id:'image-13', caption:pair('“German is complicated”?', '«الألماني معقد»؟'), source:'https://www.facebook.com/photo?fbid=1607239131431602' },
+  ] },
 ];
 export const services = [
  {number:'01',title:pair('Words with a purpose.', 'كلمات لها هدف.'),name:pair('Content & scriptwriting','كتابة المحتوى والسكريبتات'),text:pair('Social copy, short-form scripts, and ideas shaped around your audience and your message.','نصوص للسوشيال ميديا وسكريبتات قصيرة وأفكار مبنية على جمهورك ورسالتك.')},
@@ -128,9 +141,16 @@ export const services = [
  {number:'03',title:pair('A visual point of view.', 'فكرة تتحوّل لصورة.'),name:pair('Social media design','تصميم السوشيال ميديا'),text:pair('Visual content that gives your message a recognizable look across social platforms.','محتوى بصري يمنح رسالتك شكلًا مميزًا عبر منصات التواصل.')},
  {number:'04',title:pair('Ideas with direction.', 'أفكار لها اتجاه.'),name:pair('Content planning','تخطيط المحتوى'),text:pair('Audience profiles, content angles, and calendars that give each piece a place in the bigger picture.','دراسة للجمهور وزوايا للمحتوى وخطط تجعل كل قطعة جزءًا من صورة متكاملة.')},
 ];
+/** Published designs in a project; a carousel counts once, however many slides it has. */
+export const designCount = (project: Project) => project.designs?.length ?? 0;
 /** Honest volume counts, derived from the projects above. */
 export const workTotals = {
  reels: projects.reduce((sum, project) => sum + (project.videos?.length ?? 0), 0),
- designs: projects.reduce((sum, project) => sum + (project.images?.length ?? 0), 0),
+ designs: projects.reduce((sum, project) => sum + designCount(project), 0),
  documents: projects.reduce((sum, project) => sum + (project.documents?.length ?? 0), 0),
+};
+/** Earlier single-post project URLs, now designs inside a series. Their pages redirect to the design. */
+export const legacyProjects: Record<string, { slug: string; design: string }> = {
+ 'spanish-course-keep-going': { slug: 'spanish-social-content', design: 'image-12' },
+ 'spanish-course-tanta': { slug: 'spanish-social-content', design: 'image-14' },
 };

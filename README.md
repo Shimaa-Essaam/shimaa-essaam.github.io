@@ -21,17 +21,21 @@ Open http://localhost:3000. Run `npm run lint` to check the source and `npm run 
 
 ## Editing content
 
-- `src/lib/content.ts`: projects, services, and contact information. Each project has optional `outcome` and `testimonial` fields: they are placeholders and only appear on the case-study page once filled with real, attributable content.
-- `src/lib/sources.ts`: Facebook pages and original work links.
+- `src/lib/content.ts`: projects, services, and contact information. Design series list their designs with a caption and Facebook source per design. Each project has optional `outcome` and `testimonial` fields: they are placeholders and only appear on the case-study page once filled with real, attributable content.
+- `src/lib/sources.ts`: Facebook brand pages and reel source links.
+- `src/lib/validate-content.ts`: checks the content data on every build (missing files, duplicate ids, bad source links).
 - `src/lib/seo.ts`: page titles, descriptions, social cards and structured data.
 - `src/components/pages/`: bilingual page content; `src/components/`: shared UI.
 - `src/app/(en)` and `src/app/(ar)/ar`: thin route files for each language.
 - `src/app/globals.css`: visual styling, organised in numbered sections with design tokens at the top.
 - `public/`: website images, videos, and downloadable documents.
 
+**To add new work, follow [docs/adding-work.md](docs/adding-work.md).** In short: add designs to an existing series, never a new section per post.
+
 After adding or replacing media, regenerate the derived images:
 
 ```sh
+python scripts/optimize-images.py add <file> <image-id>  # one new design: full size, preview, phone copy
 python scripts/optimize-images.py        # card thumbnails and reel posters (Pillow)
 python scripts/render-social-images.py   # social preview cards + apple icon (Playwright)
 ```

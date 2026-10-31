@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import { ArrowUpRight, Play } from 'lucide-react';
-import { categories, type Language, type Project } from '@/lib/content';
+import { categories, designCount, type Language, type Project } from '@/lib/content';
 import { asset, pick, route } from '@/lib/site';
 
 /** '/images/video-04.jpg' → '/images/thumbs/video-04.webp' */
@@ -9,7 +9,8 @@ const thumbFor = (cover: string) => cover.replace(/^\/images\/(.+)\.\w+$/, '/ima
 
 function deliverables(project: Project, lang: Language) {
   if (project.videos) return pick(lang, `${project.videos.length} ${project.videos.length === 1 ? 'reel' : 'reels'}`, `${project.videos.length} فيديو`);
-  if (project.images) return pick(lang, `${project.images.length} ${project.images.length === 1 ? 'design' : 'designs'}`, `${project.images.length} تصميم`);
+  const designs = designCount(project);
+  if (designs) return pick(lang, `${designs} ${designs === 1 ? 'design' : 'designs'}`, `${designs} تصميم`);
   if (project.documents) return pick(lang, `${project.documents.length} documents`, `${project.documents.length} ملفات`);
   return '';
 }

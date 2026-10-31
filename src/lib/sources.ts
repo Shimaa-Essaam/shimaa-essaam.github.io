@@ -15,24 +15,18 @@ export const publishedSources=[
  {url:'https://www.facebook.com/share/r/1Ea6e4Rrz4/',kind:'video',label:pair('Facebook reel 04','ريل فيسبوك ٠٤'),mediaId:null as string|null},
  {url:'https://www.facebook.com/share/r/1DqrSJYZBB/',kind:'video',label:pair('Facebook reel 05','ريل فيسبوك ٠٥'),mediaId:null as string|null},
 ];
-// Matched against the original Facebook screenshot supplied by the user.
-const matchedSources:Record<string,string>={
+// Reels matched against the original Facebook posts supplied by the user. Design sources live on each
+// design in content.ts, next to the image they belong to.
+export const matchedSources:Record<string,string>={
  'video-14':'https://www.facebook.com/reel/1419327659743960/?s=single_unit',
- 'image-12':'https://www.facebook.com/photo?fbid=1593915736097275',
- 'image-13':'https://www.facebook.com/photo?fbid=1607239131431602',
  'video-13':'https://www.facebook.com/share/r/14nEPCCFBfq/',
  'video-09':'https://www.facebook.com/reel/1001260666228831',
  'video-07':'https://www.facebook.com/reel/27388805627428000',
  'video-02':'https://www.facebook.com/share/r/1DWUTVaA5F/',
  'video-12':'https://www.facebook.com/share/r/1cgDftPYG5/',
- 'image-01':'https://www.facebook.com/photo.php?fbid=1526658582822991',
- 'image-10':'https://www.facebook.com/photo.php?fbid=1450535063768677',
- 'image-03':'https://www.facebook.com/photo.php?fbid=1487433366745513',
- 'image-05':'https://www.facebook.com/photo.php?fbid=1489223769899806',
  'video-03':'https://www.facebook.com/reel/1021035483831464',
  'video-01':'https://www.facebook.com/reel/2208512143219636',
  'video-04':'https://www.facebook.com/reel/1306681398299141',
  'video-08':'https://www.facebook.com/reel/1040022891909892',
- 'image-09':'https://www.facebook.com/photo/?fbid=1456985116457005&set=a.557295843092608',
 };
 export const sourceFor=(id:string)=>matchedSources[id]??publishedSources.find(source=>source.mediaId===id)?.url;
