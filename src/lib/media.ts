@@ -18,8 +18,9 @@ export const designSizes: Record<string, [number, number]> = {
   'image-16': [2508, 2508],
   'image-17': [2048, 2048],
   'image-18': [2508, 2508],
-  'image-19': [2508, 2508],
-  'image-20': [1199, 1312],
+  'image-21': [1254, 1254],
+  'image-22': [1254, 1254],
+  'image-23': [2048, 2048],
 };
 
 /** Designs wider than 1600 px (the 2x AI-upscaled ones) also ship this 1254 px copy in public/images/large for phones. */

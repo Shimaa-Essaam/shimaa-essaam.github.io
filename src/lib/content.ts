@@ -78,8 +78,7 @@ export const projects: Project[] = [
    { id:'image-12', caption:pair('Start and stall? Not with us', 'بتبدأ وتكسل؟ معانا مش هتقف!'), source:'https://www.facebook.com/photo?fbid=1593915736097275' },
    { id:'image-14', caption:pair('A real upgrade, in Tanta', 'كورس إسباني يعملك Upgrade في طنطا') },
    { id:'image-15', slides:['image-16','image-17','image-18'], caption:pair('Common Spanish mistakes', 'أخطاء شائعة في تعلّم الإسباني'), source:'https://www.facebook.com/koraasarcasm/posts/pfbid02xA5bseJM4K9oX2vzsBSFnvQFKBsdfDUHbHS7cySXgNdBAiEzpbnvfi14B93pVWjwl' },
-   { id:'image-19', caption:pair('New course launch', 'كورس جديد هيبدأ'), source:'https://www.facebook.com/photo?fbid=1614406050714910' },
-   { id:'image-20', caption:pair('November group timetable', 'مواعيد مجموعات نوفمبر'), source:'https://www.facebook.com/photo?fbid=1618860143602834' },
+   { id:'image-21', caption:pair('Woman in red presenting a half-price Spanish course offer for February', 'عرض فبراير لكورس الإسباني بنصف السعر تقدّمه شابة ترتدي الأحمر') },
   ] },
  { slug:'espacio-space',brand:'Espacio',category:'video',color:'rose',
   title:pair('More than a place to work.', 'مساحة لأكثر من مجرد شغل.'),
@@ -133,6 +132,8 @@ export const projects: Project[] = [
   approach:pair('Set a familiar study-desk scene with German books, notes, and flag details beside a bold Arabic headline. Orange highlights pick out the key phrase, the course features, and the contact number within Creativo’s visual identity.', 'مشهد مكتب مذاكرة مألوف فيه كتب وملاحظات ألمانية وعلم ألمانيا جنب عنوان عربي بارز. اللمسات البرتقالية بتبرز الجملة الأساسية ومميزات الكورس ورقم التواصل ضمن هوية كرياتيفو.'),
   role:pair('Social media design', 'تصميم سوشيال ميديا'),cover:'/images/image-13.webp',designs:[
    { id:'image-13', caption:pair('“German is complicated”?', '«الألماني معقد»؟'), source:'https://www.facebook.com/photo?fbid=1607239131431602' },
+   { id:'image-22', caption:pair('Three German phrases for clarifying a job interview question, with Arabic translations', 'ثلاث عبارات ألمانية مع ترجمتها للعربية لاستيضاح سؤال في مقابلة عمل') },
+   { id:'image-23', caption:pair('February German course offer with a large orange 50% discount sign', 'عرض فبراير لكورس الألماني مع علامة خصم برتقالية كبيرة بنسبة ٥٠٪') },
   ] },
 ];
 export const services = [
